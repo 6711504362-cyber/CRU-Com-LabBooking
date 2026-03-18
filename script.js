@@ -377,20 +377,29 @@ function closeModal() {
 
 function confirmBooking() {
   if (!bookingTarget || !selectedDate || !selectedTimeSlot) return;
+  
+  // เตรียมข้อมูล
   const newBooking = {
-    id: 'bk_' + Date.now(),
     targetId: bookingTarget.id,
     targetName: bookingTarget.name,
     targetEmoji: bookingTarget.emoji,
     targetType: bookingTarget.type,
     date: selectedDate,
     timeSlot: selectedTimeSlot,
-    bookedAt: new Date().toISOString()
+    timestamp: firebase.firestore.FieldValue.serverTimestamp() // ใช้เวลาจาก Server
   };
-  bookings.push(newBooking);
-  closeModal();
-  showToast(`จอง ${newBooking.targetName} สำเร็จ! 🎉`);
-  renderMyBookings();
+
+  // 🌟 วางตรงนี้: ส่งข้อมูลไปที่ Firestore
+  db.collection("bookings").add(newBooking)
+    .then(() => {
+      closeModal();
+      showToast(`จอง ${newBooking.targetName} สำเร็จ! 🎉`);
+      showDashTab('mybookings'); // เปลี่ยนไปหน้าประวัติการจอง
+    })
+    .catch((error) => {
+      console.error("Error: ", error);
+      showToast("เกิดข้อผิดพลาดในการจอง", "error");
+    });
 }
 
 // ===================== MY BOOKINGS =====================
