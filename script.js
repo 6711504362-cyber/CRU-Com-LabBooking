@@ -19,6 +19,12 @@ const firebaseConfig = {
   appId: "1:711907001974:web:2d3dd8eaba845ea3094157",
   measurementId: "G-R8Z5YQP77R"
 };
+
+// 2. คำสั่งเปิดใช้งาน Firebase (ห้ามลืม 2 บรรทัดนี้!)
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+}
+const db = firebase.firestore(); // 👈 ตัวแปร db ต้องประกาศตรงนี้ครับ!
 const resources = [
   { id: 'r1', name: 'mBot2', emoji: '🤖', desc: 'หุ่นยนต์เรียนรู้ AI', category: 'robot', available: true },
   { id: 'r2', name: 'CyberPi', emoji: '🎮', desc: 'บอร์ดเรียนรู้ IoT', category: 'board', available: true },
