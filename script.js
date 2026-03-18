@@ -1,3 +1,4 @@
+
 // ===================== STATE =====================
 let currentPage = 'login';
 let currentUser = null;
@@ -9,6 +10,15 @@ let bookingTarget = null;
 let bookings = [];
 let pendingDeleteId = null;
 
+const firebaseConfig = {
+  apiKey: "AIzaSyDCGsOG3KVzDqgGiEjjEkkTx0Tvxodq6hk",
+  authDomain: "crucom-labbooking.firebaseapp.com",
+  projectId: "crucom-labbooking",
+  storageBucket: "crucom-labbooking.firebasestorage.app",
+  messagingSenderId: "711907001974",
+  appId: "1:711907001974:web:2d3dd8eaba845ea3094157",
+  measurementId: "G-R8Z5YQP77R"
+};
 const resources = [
   { id: 'r1', name: 'mBot2', emoji: '🤖', desc: 'หุ่นยนต์เรียนรู้ AI', category: 'robot', available: true },
   { id: 'r2', name: 'CyberPi', emoji: '🎮', desc: 'บอร์ดเรียนรู้ IoT', category: 'board', available: true },
